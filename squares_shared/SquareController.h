@@ -12,8 +12,7 @@
 
 @interface SquareController : NSObject
 
-@property (nonatomic, assign) CGFloat width;
-@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat size;
 @property (nonatomic, assign) CGFloat posX;
 @property (nonatomic, assign) CGFloat posY;
 
@@ -21,7 +20,7 @@
 @property (nonatomic, assign) CGFloat colorG;
 @property (nonatomic, assign) CGFloat colorB;
 
-- (instancetype)initWithDimensionsWidth:(CGFloat)width Height:(CGFloat)height PosX:(CGFloat)posX PosY:(CGFloat)posY;
+- (instancetype)initWithDimensionsSize:(CGFloat)size PosX:(CGFloat)posX PosY:(CGFloat)posY;
 - (BOOL)containsPointX:(CGFloat)x Y:(CGFloat)y;
 -(void)moveByX: (CGFloat)x Y:(CGFloat)y;
 -(void)ensureBordersWidth: (CGFloat)width Height:(CGFloat)height;

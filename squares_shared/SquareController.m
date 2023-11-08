@@ -9,11 +9,10 @@
 
 @implementation SquareController
 
-- (instancetype)initWithDimensionsWidth:(CGFloat)width Height:(CGFloat)height PosX:(CGFloat)posX PosY:(CGFloat)posY {
+- (instancetype)initWithDimensionsSize:(CGFloat)size PosX:(CGFloat)posX PosY:(CGFloat)posY {
     self = [super init];
     if (self) {
-        self.width = width;
-        self.height = height;
+        self.size = size;
         self.posX = posX;
         self.posY = posY;
         
@@ -25,8 +24,8 @@
 }
 
 - (BOOL)containsPointX:(CGFloat)x Y:(CGFloat)y {
-    return (x >= self.posX && x <= self.posX + self.width &&
-            y >= self.posY && y <= self.posY + self.height);
+    return (x >= self.posX && x <= self.posX + self.size &&
+            y >= self.posY && y <= self.posY + self.size);
 }
 
 -(void)moveByX: (CGFloat)x Y:(CGFloat)y {
@@ -39,14 +38,14 @@
     if(self.posX < 0){
         self.posX = 0;
     }
-    if(self.posX + self.width > width){
-        self.posX = width - self.width;
+    if(self.posX + self.size > width){
+        self.posX = width - self.size;
     }
     if(self.posY < 0){
         self.posY = 0;
     }
-    if(self.posY + self.height > height){
-        self.posY = height - self.height;
+    if(self.posY + self.size > height){
+        self.posY = height - self.size;
     }
 }
 

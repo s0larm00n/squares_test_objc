@@ -28,7 +28,7 @@
     for (NSInteger index = 0; index < self.squaresManager.squares.count; index++) {
         SquareController *square = self.squaresManager.squares[index];
         [square ensureBordersWidth:windowWidth Height:windowHeight];
-        NSRect squareRect = NSMakeRect(square.posX, square.posY, square.width, square.height);
+        NSRect squareRect = NSMakeRect(square.posX, square.posY, square.size, square.size);
         NSColor *squareColor = [NSColor colorWithCalibratedRed:square.colorR green:square.colorG blue:square.colorB alpha:1.0];
         [squareColor setFill];
         NSRectFill(squareRect);
@@ -57,7 +57,7 @@
     
     SquareController *square = [self.squaresManager getSquareByLocationWithX:location.x Y:location.y];
     if(!square){
-        square = [self.squaresManager addSquareWidth:newSquareSize Height:newSquareSize X:(location.x - newSquareSize / 2) Y:(location.y - newSquareSize / 2)];
+        square = [self.squaresManager addSquareWithSize:newSquareSize X:(location.x - newSquareSize / 2) Y:(location.y - newSquareSize / 2)];
     }
     [square ensureBordersWidth:windowWidth Height:windowHeight];
     self.lastTapped = square;

@@ -16,7 +16,7 @@
 
 - (instancetype)init;
 - (SquareController *)getSquareByLocationWithX:(CGFloat)x Y:(CGFloat)y;
-- (SquareController *)addSquareWidth:(CGFloat)width Height:(CGFloat)height X:(CGFloat)x Y:(CGFloat)y;
+- (SquareController *)addSquareWithSize:(CGFloat)size X:(CGFloat)x Y:(CGFloat)y;
 
 @end
 

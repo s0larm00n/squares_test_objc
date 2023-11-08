@@ -52,8 +52,8 @@
     return collisionSquare;
 }
 
-- (SquareController *)addSquareWidth:(CGFloat)width Height:(CGFloat)height X:(CGFloat)x Y:(CGFloat)y {
-    SquareController *newSquare = [[SquareController alloc] initWithDimensionsWidth:width Height:height PosX:x PosY:y];
+- (SquareController *)addSquareWithSize:(CGFloat)size X:(CGFloat)x Y:(CGFloat)y {
+    SquareController *newSquare = [[SquareController alloc] initWithDimensionsSize:size PosX:x PosY:y];
     [self.squares addObject:newSquare];
     return newSquare;
 }
