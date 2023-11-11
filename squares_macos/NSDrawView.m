@@ -45,45 +45,29 @@
     }
 }
 
-
 - (void)mouseDown:(NSEvent *)event {
     NSPoint location = [self convertPoint:[event locationInWindow] fromView:nil];
-    NSLog(@"Mouse down at x:%f, y:%f", location.x, location.y);
-    
     NSRect windowRect = self.window.frame;
     CGFloat windowWidth = windowRect.size.width;
     CGFloat windowHeight = windowRect.size.height;
-    CGFloat newSquareSize = MIN(windowWidth, windowHeight) / 10;
-    
-    SquareController *square = [self.squaresManager getSquareByLocationWithX:location.x Y:location.y];
-    if(!square){
-        square = [self.squaresManager addSquareWithSize:newSquareSize X:(location.x - newSquareSize / 2) Y:(location.y - newSquareSize / 2)];
-    }
-    [square ensureBordersWidth:windowWidth Height:windowHeight];
-    self.lastTapped = square;
+    [self.squaresManager onPointerDownX:location.x Y:location.y WindowWidth:windowWidth WindowHeight:windowHeight];
     [self setNeedsDisplay:YES];
 }
 
 - (void)mouseDragged:(NSEvent *)event {
-    NSPoint location = [self convertPoint:[event locationInWindow] fromView:nil];
-    //NSPoint previousLocation = [self convertPoint:[event previousLocationInWindow] fromView:nil];
     CGFloat deltaX = [event deltaX];
     CGFloat deltaY = [event deltaY];
-    NSLog(@"Mouse moved at x:%f, y:%f", location.x, location.y);
-    [self.lastTapped moveByX:(deltaX) Y:(-deltaY)];
-    
     NSRect windowRect = self.window.frame;
     CGFloat windowWidth = windowRect.size.width;
     CGFloat windowHeight = windowRect.size.height;
-    
-    [self.lastTapped ensureBordersWidth:windowWidth Height:windowHeight];
+    [self.squaresManager onPointerMoveDeltaX:(deltaX) DeltaY:(-deltaY) WindowWidth:(windowWidth) WindowHeight:(windowHeight)];
     [self setNeedsDisplay:YES];
     
 }
 
 - (void)mouseUp:(NSEvent *)event {
     NSLog(@"Mouse up");
-    self.lastTapped = nil;
+    [self.squaresManager onPointerUp];
 }
 
 @end

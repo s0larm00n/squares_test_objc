@@ -17,6 +17,9 @@
 - (instancetype)init;
 - (SquareController *)getSquareByLocationWithX:(CGFloat)x Y:(CGFloat)y;
 - (SquareController *)addSquareWithSize:(CGFloat)size X:(CGFloat)x Y:(CGFloat)y;
+- (void) onPointerDownX:(CGFloat)x Y:(CGFloat)y WindowWidth:(CGFloat)windowWidth WindowHeight:(CGFloat)windowHeight;
+- (void) onPointerMoveDeltaX:(CGFloat)deltaX DeltaY:(CGFloat)deltaY WindowWidth:(CGFloat)windowWidth WindowHeight:(CGFloat)windowHeight;
+- (void) onPointerUp;
 
 @end
 

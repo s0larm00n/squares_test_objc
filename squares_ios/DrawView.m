@@ -47,20 +47,14 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self];
-    NSLog(@"Touch began at x:%f, y:%f", touchLocation.x, touchLocation.y);
-    
+
     UIWindow *window = self.window;
     CGSize windowSize = window.frame.size;
     CGFloat windowWidth = windowSize.width;
     CGFloat windowHeight = windowSize.height;
-    CGFloat newSquareSize = MIN(windowWidth, windowHeight) / 10;
     
-    SquareController *square = [self.squaresManager getSquareByLocationWithX:touchLocation.x Y:touchLocation.y];
-    if(!square){
-        square = [self.squaresManager addSquareWithSize:newSquareSize X:(touchLocation.x - newSquareSize / 2) Y:(touchLocation.y - newSquareSize / 2)];
-    }
-    [square ensureBordersWidth:windowWidth Height:windowHeight];
-    self.lastTapped = square;
+    [self.squaresManager onPointerDownX:touchLocation.x Y:touchLocation.y WindowWidth:windowWidth WindowHeight:windowHeight];
+    
     [self setNeedsDisplay];
 }
 
@@ -68,20 +62,21 @@
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self];
     CGPoint previousLocation = [touch previousLocationInView:self];
-    NSLog(@"Touch moved at x:%f, y:%f", touchLocation.x, touchLocation.y);
-    [self.lastTapped moveByX:(touchLocation.x - previousLocation.x) Y:(touchLocation.y - previousLocation.y)];
+    CGFloat deltaX = touchLocation.x - previousLocation.x;
+    CGFloat deltaY = touchLocation.y - previousLocation.y;
     
     UIWindow *window = self.window;
     CGSize windowSize = window.frame.size;
     CGFloat windowWidth = windowSize.width;
     CGFloat windowHeight = windowSize.height;
-    [self.lastTapped ensureBordersWidth:windowWidth Height:windowHeight];
+  
+    [self.squaresManager onPointerMoveDeltaX:(deltaX) DeltaY:(deltaY) WindowWidth:(windowWidth) WindowHeight:(windowHeight)];
+    
     [self setNeedsDisplay];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    NSLog(@"Touch Ended");
-    self.lastTapped = nil;
+    [self.squaresManager onPointerUp];
 }
 
 @end

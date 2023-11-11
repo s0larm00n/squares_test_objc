@@ -14,8 +14,7 @@
 
 @interface DrawView : UIView
 
-@property (nonatomic, strong) SquaresManager *squaresManager;
-@property (nonatomic, strong) SquareController *lastTapped;
+@property(nonatomic, strong) SquaresManager *squaresManager;
 
 @end
 
